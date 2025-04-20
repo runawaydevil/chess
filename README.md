@@ -38,8 +38,8 @@ Um jogo de xadrez online desenvolvido com Python, Flask e Socket.IO, onde você 
 
 1. Clone o repositório:
 ```bash
-git clone https://github.com/pablomurad/dchess.git
-cd dchess
+git clone https://github.com/pablomurad/chess.git
+cd chess
 ```
 
 2. Crie um ambiente virtual e ative-o:
