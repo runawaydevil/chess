@@ -111,6 +111,38 @@ document.getElementById('resetBtn').addEventListener('click', function() {
     socket.emit('reset');
 });
 
+// Adiciona eventos de clique nos botões de dificuldade
+document.querySelectorAll('.difficulty-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        const difficulty = this.dataset.difficulty;
+        
+        // Remove a classe active de todos os botões
+        document.querySelectorAll('.difficulty-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        // Adiciona a classe active ao botão clicado
+        this.classList.add('active');
+        
+        // Envia a dificuldade para o servidor
+        socket.emit('set_difficulty', difficulty);
+    });
+});
+
+// Escuta por mudanças na dificuldade
+socket.on('difficulty_changed', function(data) {
+    // Atualiza o status com a mensagem de mudança de dificuldade
+    const status = document.getElementById('status');
+    status.textContent = data.message;
+    
+    // Remove a mensagem após 3 segundos
+    setTimeout(() => {
+        if (status.textContent === data.message) {
+            status.textContent = 'Vez do ' + (game.turn() === 'w' ? 'Branco' : 'Preto');
+        }
+    }, 3000);
+});
+
 // Funções auxiliares para destacar movimentos inválidos
 function removeGreySquares() {
     $('#board .square-55d63').css('background', '');

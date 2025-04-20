@@ -89,6 +89,19 @@ def handle_reset():
         logger.error(f'Erro ao reiniciar jogo: {str(e)}')
         emit('error', {'message': f'Erro ao reiniciar jogo: {str(e)}'})
 
+@socketio.on('set_difficulty')
+def handle_set_difficulty(difficulty):
+    try:
+        logger.info(f'Alterando dificuldade para: {difficulty}')
+        engine.set_difficulty(difficulty)
+        emit('difficulty_changed', {
+            'difficulty': difficulty,
+            'message': f'Dificuldade alterada para {difficulty}'
+        })
+    except Exception as e:
+        logger.error(f'Erro ao alterar dificuldade: {str(e)}')
+        emit('error', {'message': f'Erro ao alterar dificuldade: {str(e)}'})
+
 if __name__ == '__main__':
     logger.info('Iniciando servidor na porta 3654...')
     socketio.run(app, debug=True, port=3654) 

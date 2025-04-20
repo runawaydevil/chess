@@ -142,4 +142,41 @@ footer a:hover {
     h1 {
         font-size: 24px;
     }
+}
+
+.difficulty-controls {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.difficulty-controls h3 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.difficulty-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.difficulty-btn {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.difficulty-btn:hover {
+    background-color: #45a049;
+}
+
+.difficulty-btn.active {
+    background-color: #2E7D32;
+    font-weight: bold;
 } 

@@ -5,10 +5,22 @@ import random
 class ChessEngine:
     def __init__(self):
         self.board = chess.Board()
+        self.difficulty = "intermediario"  # Nível padrão
     
-    def get_best_move(self, depth=3):
+    def set_difficulty(self, difficulty):
+        """Define o nível de dificuldade"""
+        self.difficulty = difficulty
+    
+    def get_best_move(self):
         """Retorna o melhor movimento para a posição atual"""
         try:
+            # Define a profundidade baseada na dificuldade
+            depth = {
+                "facil": 1,
+                "intermediario": 3,
+                "dificil": 5
+            }.get(self.difficulty, 3)
+            
             # Usa o Stockfish se disponível, senão usa um movimento aleatório válido
             with chess.engine.SimpleEngine.popen_uci("stockfish") as engine:
                 result = engine.play(self.board, chess.engine.Limit(depth=depth))
